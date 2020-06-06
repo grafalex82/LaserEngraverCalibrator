@@ -24,6 +24,20 @@ max_power = 1000
 power_grades = 19	# number of power gradations (over Y axis)
 
 
+def generate_box(f):
+	f.write("")
+	f.comment('Outer box')
+
+	f.set_speed(ruler_speed)
+
+	f.fast_go_to(0, 0)
+	f.set_power(ruler_power)
+	f.go_to(area_width, 0)
+	f.go_to(area_width, area_height)
+	f.go_to(0, area_height)
+	f.go_to(0, 0)
+	f.laser_off()
+
 
 
 def generate_X_ruler(f):
@@ -91,7 +105,8 @@ def generate_gcode(f):
 	f.set_units_mm(comment='units - mm')
 	f.set_position(0, 0, comment='Use current position as origin')
 	
-	# generate ruler
+	# generate outer box and ruler
+	generate_box(f)
 	generate_X_ruler(f)
 	generate_Y_ruler(f)
 	
