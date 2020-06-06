@@ -27,7 +27,8 @@ power_grades = 19	# number of power gradations (over Y axis)
 
 
 def generate_X_ruler(f):
-	f.write('\n;X ruler')
+	f.write("")
+	f.comment('X ruler')
 	f.set_speed(ruler_speed)
 	
 	y = area_height + ruler_spacing
@@ -44,7 +45,8 @@ def generate_X_ruler(f):
 
 		
 def generate_Y_ruler(f):
-	f.write('\n;Y ruler')
+	f.write("")
+	f.comment('Y ruler')
 	f.set_speed(ruler_speed)
 
 	x = area_width + ruler_spacing
@@ -61,12 +63,13 @@ def generate_Y_ruler(f):
 
 
 def generate_image(f):
-	f.write('\n;The image')
+	f.write("")
+	f.comment('The image')
 	for y_idx in range(speed_grades):
 		y = numpy.linspace(0, area_height, speed_grades)[y_idx]
 		speed = numpy.linspace(min_speed, max_speed, speed_grades)[y_idx]
 		
-		f.write("; speed {}".format(speed))
+		f.comment("speed {}".format(speed))
 		f.fast_go_to(0, y)
 		f.set_speed(speed)
 		
