@@ -86,10 +86,10 @@ def generate_image(f):
 		
 def generate_gcode(f):
 	# Generate header
-	f.write('M05 S0 			; Turn off the laser')
-	f.write('G90	 			; Absolute positioning')
-	f.write('G21 				; units - mm')
-	f.write('G92 X0 Y0			; Use current position as origin')
+	f.laser_off(comment='Turn off the laser')
+	f.absolute_positioning(comment='Absolute positioning')
+	f.set_units_mm(comment='units - mm')
+	f.set_position(0, 0, comment='Use current position as origin')
 	
 	# generate ruler
 	generate_X_ruler(f)
@@ -99,9 +99,9 @@ def generate_gcode(f):
 	generate_image(f)
 
 	f.write('')
-	f.write('M05 S0 			; Turn off the laser')
-	f.write('G0 X0 Y0			; return to origin')
-	f.write('M18				; Disable all stepper motors')
+	f.laser_off(comment='Turn off the laser')
+	f.fast_go_to(0, 0, comment='return to origin')
+	f.disable_motors(comment='Disable all stepper motors')
 	
 	
 def main():
